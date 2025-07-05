@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 import { Link, useLocation } from 'react-router-dom';
-import { assets } from '../../assets/assets';
 
 const Navbar = () => {
   const [activeSection, setActiveSection] = useState('Home');
   const location = useLocation();
 
-  // Scroll to section smoothly
   const handleScrollLink = (id) => {
     const section = document.getElementById(id);
     if (section) {
@@ -16,7 +14,6 @@ const Navbar = () => {
     }
   };
 
-  // Highlight active menu when navigating to different pages
   useEffect(() => {
     if (location.pathname === '/') {
       setActiveSection('Home');
@@ -27,8 +24,6 @@ const Navbar = () => {
 
   return (
     <div className='navbar'>
-      <img src={assets.logo1} alt="Logo" className='logo' />
-
       <ul className="navbar-menu">
         <li>
           <Link to='/' onClick={() => setActiveSection('Home')} className={activeSection === 'Home' ? 'active link-btn' : 'link-btn'}>Home</Link>
@@ -47,7 +42,7 @@ const Navbar = () => {
         </li>
       </ul>
 
-      <button className="link-btn">Sign In</button>
+      <button className="signin-btn">Sign In</button>
     </div>
   );
 };

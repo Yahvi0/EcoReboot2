@@ -1,27 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 .navbar {
-  background: linear-gradient(90deg, #e1f5e0, #c8facc); /* Light green */
+  position: fixed; /* 🧷 Makes it stay on top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* ⬆️ Keeps it above all other elements */
+  background: linear-gradient(90deg, #326030, #90e998); /* Optional background */
   padding: 15px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: 'Inter', sans-serif;
-  position: sticky;
-  top: 0;
-  z-index: 999;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.logo {
-  height: 80px;
-  border-radius: 50px;
+  font-family: 'Inter', sans-serif;
 }
 
 .navbar-menu {
   display: flex;
-  gap: 30px;
   list-style: none;
+  gap: 30px;
   margin: 0;
   padding: 0;
 }
@@ -32,55 +29,56 @@
 }
 
 .link-btn {
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 400;
-  color: #0a3d1c;
-  background: none;
+  background: transparent;
   border: none;
-  padding: 10px 16px;
-  border-radius: 25px;
-  transition: background 0.2s ease-in-out, font-weight 0.2s;
+  font-size: 16px;
+  padding: 8px 16px;
+  color: white;
+  font-weight: 400;
   cursor: pointer;
+  border-radius: 25px;
+  transition: 0.3s;
 }
 
 .link-btn:hover {
-  background-color: #c8facc;
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .link-btn.active {
   font-weight: 600;
-  background-color: #aef8ac;
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
-.navbar button {
+.signin-btn {
   font-size: 16px;
   font-weight: 500;
-  color: #0a3d1c;
-  border: 2px solid #0a3d1c;
+  color: white;
   background: transparent;
-  padding: 8px 18px;
+  border: 2px solid white;
+  padding: 8px 20px;
   border-radius: 25px;
   cursor: pointer;
   transition: 0.3s;
 }
 
-.navbar button:hover {
-  background-color: #b6f0b1;
+.signin-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 @media (max-width: 1050px) {
-  .logo {
-    height: 60px;
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
 
   .navbar-menu {
     flex-wrap: wrap;
-    gap: 20px;
     justify-content: center;
+    gap: 20px;
   }
 
-  .navbar button {
+  .signin-btn {
     padding: 6px 15px;
     font-size: 14px;
   }

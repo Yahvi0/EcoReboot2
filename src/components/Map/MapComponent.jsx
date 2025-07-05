@@ -91,7 +91,8 @@ const MapComponent = () => {
   };
 
   return (
-    <div style={{ padding: '20px', textAlign: 'center' }}>
+    
+    <div style={{ padding: '80px', textAlign: 'center' }}>
       <h2>Eco-Friendly Route Optimizer 🌍</h2>
 
       <input
@@ -147,6 +148,7 @@ const MapComponent = () => {
           borderRadius: '8px',
           cursor: 'pointer',
           marginTop: '15px',
+          
         }}
       >
         Show Route
