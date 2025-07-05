@@ -1,77 +1,147 @@
 .uservoice {
-  padding: 40px;
-  background: #f9f9f9;
+  background-color: #f9fdfb;
+  padding: 80px 20px;
   text-align: center;
-  margin-top: 60px; 
+}
+
+.uservoice h2 {
+  font-size: 2.4rem;
+  font-family: "Merriweather", serif;
+  color: #14532d;
+  margin-bottom: 10px;
 }
 
 .subtitle {
+  color: #4b5563;
   font-size: 1rem;
-  color: #666;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .review-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 25px;
+  gap: 30px;
 }
 
 .review-card {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  width: 300px;
   padding: 20px;
-  max-width: 280px;
   text-align: left;
-  transition: transform 0.3s ease;
+  transition: transform 0.4s ease, box-shadow 0.3s ease;
 }
 
 .review-card:hover {
-  transform: translateY(-5px);
-}
-
-.fade-in {
-  opacity: 0;
-  animation: fadeInUp 0.8s ease forwards;
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
+  transform: translateY(-10px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
 }
 
 .profile {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .profile img {
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
   border-radius: 50%;
-  margin-right: 12px;
+  margin-right: 15px;
 }
 
 .stars {
-  font-weight: bold;
-  color: #ff9f43;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  color: #f59e0b;
 }
 
 .title {
-  font-size: 1.1rem;
-  margin: 10px 0 5px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #14532d;
 }
 
 .message {
   font-size: 0.95rem;
   color: #444;
+  line-height: 1.5;
+}
+
+/* Form Section */
+.review-form-section {
+  margin-top: 80px;
+  background-color: #ecfdf5;
+  padding: 60px 20px;
+  border-top: 3px solid #eff4f0;
+}
+
+.review-form-section h2 {
+  font-size: 2rem;
+  color: #14532d;
+  margin-bottom: 30px;
+}
+
+.review-form {
+  max-width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.review-form input,
+.review-form textarea {
+  padding: 12px 16px;
+  border: 1px solid #095a29;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: none;
+}
+
+.review-form textarea {
+  min-height: 100px;
+}
+
+.review-form button {
+  background-color: #02542a;
+  color: white;
+  border: none;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.review-form button:hover {
+  background-color: #059669;
+}
+
+/* Fade-in animation */
+.fade-in {
+  animation: fadeIn 0.8s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .review-card {
+    width: 100%;
+  }
+
+  .review-form {
+    width: 100%;
+  }
 }
