@@ -56,7 +56,7 @@ const Header = () => {
 
         <div className="header-content">
           <p>
-            If Earth had a wishlist, this would be on it. Rethink. Replan.
+            If Earth had a wishlist, this would be on it. <br /> Rethink. Replan.
             Reboot.
           </p>
         </div>
