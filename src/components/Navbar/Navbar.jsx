@@ -1,11 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Navbar.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { assets } from '../../assets/assets';
 
 const Navbar = () => {
-  const [menu, setMenu] = useState("Home");
-  const [showLogin, setShowLogin] = useState(false);
+  const [activeSection, setActiveSection] = useState('Home');
+  const location = useLocation();
+
+  // Scroll to section smoothly
+  const handleScrollLink = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+      setActiveSection(id);
+    }
+  };
+
+  // Highlight active menu when navigating to different pages
+  useEffect(() => {
+    if (location.pathname === '/') {
+      setActiveSection('Home');
+    } else if (location.pathname === '/reviews') {
+      setActiveSection('UserVoice');
+    }
+  }, [location]);
 
   return (
     <div className='navbar'>
@@ -13,23 +31,23 @@ const Navbar = () => {
 
       <ul className="navbar-menu">
         <li>
-          <Link to='/' onClick={() => setMenu("Home")} className={menu === "Home" ? "active" : ""}>Home</Link>
+          <Link to='/' onClick={() => setActiveSection('Home')} className={activeSection === 'Home' ? 'active link-btn' : 'link-btn'}>Home</Link>
         </li>
         <li>
-          <a href='#reviews' onClick={() => setMenu("Review")} className={menu === "Review" ? "active" : ""}>Review</a>
+          <button onClick={() => handleScrollLink('reviews')} className={activeSection === 'reviews' ? 'active link-btn' : 'link-btn'}>Review</button>
         </li>
         <li>
-          <a href='#app-download' onClick={() => setMenu("Mobile-App")} className={menu === "Mobile-App" ? "active" : ""}>Mobile-App</a>
+          <button onClick={() => handleScrollLink('app-download')} className={activeSection === 'app-download' ? 'active link-btn' : 'link-btn'}>Mobile-App</button>
         </li>
         <li>
-          <a href='#footer' onClick={() => setMenu("Contact Us")} className={menu === "Contact Us" ? "active" : ""}>Contact Us</a>
+          <button onClick={() => handleScrollLink('footer')} className={activeSection === 'footer' ? 'active link-btn' : 'link-btn'}>Contact Us</button>
         </li>
         <li>
-          <a href='#footer' onClick={() => setMenu("UserVoice")} className={menu === "UserVoice" ? "active" : ""}>UserVoice </a>
+          <Link to='/reviews' onClick={() => setActiveSection('UserVoice')} className={activeSection === 'UserVoice' ? 'active link-btn' : 'link-btn'}>UserVoice</Link>
         </li>
       </ul>
 
-      <button onClick={() => setShowLogin(true)}>Sign In</button>
+      <button className="link-btn">Sign In</button>
     </div>
   );
 };

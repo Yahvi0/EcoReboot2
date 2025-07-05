@@ -4,6 +4,8 @@ import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home/Home';
 import NewPage from './pages/StartButton/StartButton';
 import MapComponent from './components/Map/MapComponent'; 
+import UserVoice from './components/UserVoice/UserVoice';
+
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/start" element={<NewPage />} />
         <Route path="/map" element={<MapComponent />} /> 
+        <Route path="/reviews" element={<UserVoice />} />
+
       </Routes>
     </div>
   );

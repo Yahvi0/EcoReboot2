@@ -1,68 +1,87 @@
-@import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Hand+Pre:wght@400..700&family=Edu+QLD+Hand:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 .navbar {
-    background-color: lime; /* Grey strip */
-    padding: 20px 40px; /* Added side padding */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  background: linear-gradient(90deg, #e1f5e0, #c8facc); /* Light green */
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
-    height: 120px; 
-    border-radius: 50px;
+  height: 80px;
+  border-radius: 50px;
 }
 
 .navbar-menu {
-    display: flex;
-    list-style: none;
-    color: black;
-    gap: 40px;
-    font-size: 18px;
-    font-family: "Edu NSW ACT Hand Pre", cursive;
-    font-weight: 600;
-}
-
-.navbar button {
-    background: transparent;
-    font-size: 16px;
-    color: black;
-    border: 1px solid darkgreen;
-    padding: 10px 25px;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: 0.3s;
-    margin-left: 20px; /* Shift it left */
-}
-
-.navbar button:hover {
-    background-color: lightgreen;
-}
-
-.navbar .active {
-    padding-bottom: 2px;
-    border-bottom: 2px solid black;
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar li {
-    cursor: pointer;
+  display: flex;
+  align-items: center;
 }
 
+.link-btn {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 400;
+  color: #0a3d1c;
+  background: none;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 25px;
+  transition: background 0.2s ease-in-out, font-weight 0.2s;
+  cursor: pointer;
+}
 
+.link-btn:hover {
+  background-color: #c8facc;
+}
 
-/* Responsive Design */
-@media (max-width:1050px) {
-    .logo {
-        height: 100px;
-    }
+.link-btn.active {
+  font-weight: 600;
+  background-color: #aef8ac;
+}
 
-    .navbar-menu {
-        gap: 20px;
-        font-size: 17px;
-    }
+.navbar button {
+  font-size: 16px;
+  font-weight: 500;
+  color: #0a3d1c;
+  border: 2px solid #0a3d1c;
+  background: transparent;
+  padding: 8px 18px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
-    .navbar button {
-        padding: 7px 20px;
-        font-size: 15px;
-    }
+.navbar button:hover {
+  background-color: #b6f0b1;
+}
+
+@media (max-width: 1050px) {
+  .logo {
+    height: 60px;
+  }
+
+  .navbar-menu {
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .navbar button {
+    padding: 6px 15px;
+    font-size: 14px;
+  }
 }
