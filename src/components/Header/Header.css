@@ -166,3 +166,55 @@
 .cta-btn:hover {
   background-color: #157347;
 }
+
+.chart-wrapper {
+  padding: 80px 40px;
+  background-color: #f5fff5;
+  text-align: center;
+  animation: fadeIn 1s ease;
+}
+
+.chart-title {
+  font-size: 2.5rem;
+  color: #14532d;
+  margin-bottom: 10px;
+  font-family: "Merriweather", serif;
+}
+
+.chart-subtitle {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 30px;
+}
+.co2-section {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+  background-color: #f0fdf4;
+  padding: 80px 40px;
+  text-align: center;
+}
+
+.co2-section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.chart-wrapper {
+  padding: 10px 40px;
+  background-color: #e6fff5;
+  text-align: center;
+  animation: fadeIn 1s ease;
+}
+
+.chart-title {
+  font-size: 2.3rem;
+  color: #14532d;
+  font-family: "Merriweather", serif;
+  margin-bottom: 10px;
+}
+
+.chart-subtitle {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 30px;
+}
