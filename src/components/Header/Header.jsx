@@ -8,7 +8,10 @@ import PredictedCO2BarChart from "../PredictedCO2Chart";
 import deliveryImg from "../../assets/deliveryImg.jpg";
 import retailerImg from "../../assets/retailerImg.jpg";
 import shopperImg from "../../assets/shopperImg.jpg";
-
+import step1Img from "../../assets/img1.jpg";
+import step2Img from "../../assets/img2.jpg";
+import step3Img from "../../assets/img3.jpg";
+import step4Img from "../../assets/img4.jpg";
 
 
 
@@ -113,15 +116,28 @@ const Header = () => {
       </div>
 
       {/* How It Works */}
-      <div className="how-it-works-section">
-        <h2>🧠 How It Works</h2>
-        <div className="steps-grid">
-          <div className="step-card">1️⃣ Enter your route</div>
-          <div className="step-card">📊 See CO₂, fuel & cost estimates</div>
-          <div className="step-card">🌿 Choose greenest path</div>
-          <div className="step-card">📈 Track and improve</div>
-        </div>
-      </div>
+     <div className="how-it-works-section">
+  <h2>🧠 How It Works</h2>
+  <div className="steps-grid">
+    <div className="step-card">
+      <img src={step1Img} alt="Enter Route" />
+      <h3>1️⃣ Enter your route</h3>
+    </div>
+    <div className="step-card">
+      <img src={step2Img} alt="CO₂ Estimate" />
+      <h3>📊 See CO₂, fuel & cost estimates</h3>
+    </div>
+    <div className="step-card">
+      <img src={step3Img} alt="Choose Path" />
+      <h3>🌿 Choose greenest path</h3>
+    </div>
+    <div className="step-card">
+      <img src={step4Img} alt="Track Progress" />
+      <h3>📈 Track and improve</h3>
+    </div>
+  </div>
+</div>
+
 
       {/* Real-Time Savings Calculator */}
       <div className="savings-calculator-section">
@@ -168,14 +184,6 @@ const Header = () => {
     </div>
   </div>
 </div>
-
-      {/* App Preview */}
-      <div className="app-preview">
-        <h2>📱 Mobile App Preview</h2>
-        <img src="/assets/app-mockup.png" alt="App preview" className="app-mockup" />
-        <p>Coming Soon to Play Store & App Store</p>
-      </div>
-
       {/* Eco Impact Stats */}
       <div className="impact-counter">
         <h2>📈 Our Impact So Far</h2>
@@ -198,24 +206,36 @@ const Header = () => {
       </div>
 
       {/* Did You Know Facts */}
-      <div className="facts-section">
-        <h2>🧠 Did You Know?</h2>
-        <ul>
-          <li>🔥 1 liter of fuel emits 2.3 kg of CO₂</li>
-          <li>🚚 Route optimization reduces delivery emissions by 15–30%</li>
-        </ul>
-      </div>
+    <div className="facts-section">
+  <h2>🧠 Did You Know?</h2>
+  <ul className="facts-list">
+    <li>
+      <span className="fact-icon">🔥</span>
+      1 liter of fuel emits <strong>2.3 kg of CO₂</strong>
+    </li>
+    <li>
+      <span className="fact-icon">🚚</span>
+      Route optimization reduces emissions by <strong>15–30%</strong>
+    </li>
+    <li>
+      <span className="fact-icon">🛢️</span>
+      Transport accounts for <strong>~25% of global CO₂ emissions</strong>
+    </li>
+    <li>
+      <span className="fact-icon">🌍</span>
+      E-commerce deliveries are expected to grow by <strong>78% by 2030</strong>
+    </li>
+    <li>
+      <span className="fact-icon">📦</span>
+      Sustainable logistics can reduce <strong>delivery costs by up to 20%</strong>
+    </li>
+    <li>
+      <span className="fact-icon">💡</span>
+      Just one optimized route can save <strong>liters of fuel daily</strong>
+    </li>
+  </ul>
+</div>
 
-      {/* Contact Form */}
-      <div className="contact-form">
-        <h2>📞 Contact Us</h2>
-        <form>
-          <input type="text" placeholder="Name" required />
-          <input type="email" placeholder="Email" required />
-          <textarea placeholder="Your Message" required></textarea>
-          <button type="submit">Send Message</button>
-        </form>
-      </div>
     </>
   );
 };

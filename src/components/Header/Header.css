@@ -111,11 +111,12 @@
 }
 
 .about-content p {
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   color: #333;
   max-width: 800px;
   margin: 20px auto;
-  line-height: 1.7;
+  line-height: 1.5;
+
 }
 
 .feature-grid {
@@ -217,19 +218,57 @@
   font-size: 1.1rem;
   color: #333;
   margin-bottom: 30px;
+
 }
+
+
+/*How It Works*/
 .how-it-works-section {
   background-color: #f0fdf4;
   padding: 80px 20px;
   text-align: center;
+  font-size: 30px;
+  color: #1a3e2f;
+
 }
 
-.how-it-works-section h2 {
-  font-size: 2.2rem;
-  color: #14532d;
-  font-family: "Merriweather", serif;
-  margin-bottom: 40px;
+.steps-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
 }
+
+.step-card {
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  width: 250px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s ease, box-shadow 0.3s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.step-card img {
+  width: 100%;
+  height: 250px;               /* Increase height slightly for better emphasis */
+  object-fit: cover;           /* Ensures image covers entire area without distortion */
+  border-radius: 10px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;  /* Smooth zoom effect */
+}
+
+.step-card h3 {
+  font-size: 1.1rem;
+  color: #14532d;
+  font-weight: 600;
+}
+
 
 .steps-grid {
   display: flex;
@@ -249,8 +288,8 @@
   transition: transform 0.3s;
 }
 
-.step-card:hover {
-  transform: translateY(-8px);
+.step-card:hover img {
+  transform: scale(1.05);      /* Slight zoom on hover */
 }
 .savings-calculator-section {
   background-color: #e6fff5;
@@ -335,85 +374,61 @@
 }
 
 .vision-section p {
-  max-width: 700px;
+  max-width: 900px;
   margin: auto;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   color: #333;
   line-height: 1.6;
 }
 .facts-section {
-  background-color: #eaffea;
+  background: linear-gradient(135deg, #eaffea, #f5fff5);
   padding: 80px 20px;
   text-align: center;
+  border-top: 4px solid #f3f5f3;
+  border-bottom: 4px solid #f2f5f2;
 }
 
 .facts-section h2 {
-  font-size: 2.2rem;
-  color: #1c4532;
+  font-size: 2.4rem;
+  color: #14532d;
   font-family: "Merriweather", serif;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
-.facts-section ul {
+.facts-list {
   list-style: none;
   padding: 0;
-}
-
-.facts-section li {
-  margin: 10px 0;
-  font-size: 1.1rem;
-  color: #14532d;
-}
-.contact-form {
-  background-color: #f0fdf4;
-  padding: 80px 20px;
-  text-align: center;
-}
-
-.contact-form h2 {
-  font-size: 2.2rem;
-  font-family: "Merriweather", serif;
-  color: #14532d;
-  margin-bottom: 20px;
-}
-
-.contact-form form {
   display: flex;
   flex-direction: column;
+  gap: 20px;
   align-items: center;
 }
 
-.contact-form input,
-.contact-form textarea {
-  width: 80%;
-  max-width: 500px;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-family: inherit;
+.facts-list li {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px 30px;
+  max-width: 600px;
+  width: 100%;
+  font-size: 1.15rem;
+  color: #14532d;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
-.contact-form textarea {
-  height: 120px;
-  resize: vertical;
+.facts-list li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
 }
 
-.contact-form button {
-  margin-top: 15px;
-  padding: 12px 30px;
-  background-color: #198754;
-  border: none;
-  border-radius: 50px;
-  color: white;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.fact-icon {
+  font-size: 1.8rem;
 }
 
-.contact-form button:hover {
-  background-color: #157347;
-}
+
 @media screen and (max-width: 768px) {
   .step-card,
   .who-card,
@@ -431,7 +446,9 @@
     width: 150px;
     height: 150px;
   }
-}/* ✅ Smooth transitions for dark mode */
+}
+
+/* ✅ Smooth transitions for dark mode */
 .who-section {
   background-color: #f0fdf4;
   padding: 100px 20px;
@@ -503,24 +520,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   
 }
-.app-preview {
-  background-color: #eaffea;
-  padding: 80px 20px;
-  text-align: center;
-}
 
-.app-preview h2 {
-  font-size: 2.2rem;
-  font-family: "Merriweather", serif;
-  color: #1c4532;
-}
-
-.app-mockup {
-  width: 250px;
-  margin-top: 20px;
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-}
 .who-card {
   transition: transform 0.4s ease, box-shadow 0.3s ease, background-color 0.4s ease;
 }
