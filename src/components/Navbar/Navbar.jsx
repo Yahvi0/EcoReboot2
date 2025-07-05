@@ -24,6 +24,9 @@ const Navbar = () => {
         <li>
           <a href='#footer' onClick={() => setMenu("Contact Us")} className={menu === "Contact Us" ? "active" : ""}>Contact Us</a>
         </li>
+        <li>
+          <a href='#footer' onClick={() => setMenu("UserVoice")} className={menu === "UserVoice" ? "active" : ""}>UserVoice </a>
+        </li>
       </ul>
 
       <button onClick={() => setShowLogin(true)}>Sign In</button>
