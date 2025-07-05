@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Hand+Pre:wght@400..700&family=Edu+QLD+Hand:wght@400..700&display=swap');
+
+.navbar {
+    background-color: lime; /* Grey strip */
+    padding: 20px 40px; /* Added side padding */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    height: 120px; 
+    border-radius: 50px;
+}
+
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    color: black;
+    gap: 40px;
+    font-size: 18px;
+    font-family: "Edu NSW ACT Hand Pre", cursive;
+    font-weight: 600;
+}
+
+.navbar button {
+    background: transparent;
+    font-size: 16px;
+    color: black;
+    border: 1px solid darkgreen;
+    padding: 10px 25px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-left: 20px; /* Shift it left */
+}
+
+.navbar button:hover {
+    background-color: lightgreen;
+}
+
+.navbar .active {
+    padding-bottom: 2px;
+    border-bottom: 2px solid black;
+}
+
+.navbar li {
+    cursor: pointer;
+}
+
+
+
+/* Responsive Design */
+@media (max-width:1050px) {
+    .logo {
+        height: 100px;
+    }
+
+    .navbar-menu {
+        gap: 20px;
+        font-size: 17px;
+    }
+
+    .navbar button {
+        padding: 7px 20px;
+        font-size: 15px;
+    }
+}
