@@ -9,7 +9,7 @@ const NewPage = () => {
     navigate('/map');
   }, [navigate]);
 
-  return null; // 👋 No UI needed anymore
+  return null; 
 };
 
 export default NewPage;
