@@ -1,22 +1,15 @@
 // StartButton.jsx
-import React from 'react';
-import './StartButton.css';
-import { useNavigate } from 'react-router-dom';  
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const NewPage = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
-  const handleStart = () => {
-    navigate('/map'); 
-  };
+  useEffect(() => {
+    navigate('/map');
+  }, [navigate]);
 
-  return (
-    <div className="background">
-      <button className="button1" onClick={handleStart}>
-        Let's get started!
-      </button>
-    </div>
-  );
+  return null; // 👋 No UI needed anymore
 };
 
 export default NewPage;
