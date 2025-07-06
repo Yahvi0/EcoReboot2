@@ -1,4 +1,3 @@
-// ChatBot.jsx
 import React, { useState, useRef, useEffect } from "react";
 import "./ChatBot.css";
 
@@ -13,92 +12,67 @@ const ChatBot = ({ stats }) => {
   const recognitionRef = useRef(null);
   const inputRef = useRef(null);
 
-  // Replace the string below with your actual OpenAI API key
-  const openaiApiKey = "YOUR_KEY";
-
   const toggleChat = () => setIsOpen(!isOpen);
   const clearChat = () => {
     setMessages([]);
     localStorage.removeItem("ecoChatHistory");
   };
 
+  const dummyReplies = [
+    "🌱 Try switching to public transport twice a week!",
+    "💡 Did you know switching to LEDs saves 80% energy?",
+    "🌍 The SDGs are 17 global goals to make the world better by 2030!",
+    "⚡ Solar energy is a powerful renewable energy source.",
+    "💰 Living green can reduce your electricity bill up to 30%!"
+  ];
+
   const sendMessage = async () => {
-    if (!input.trim()) return;
+  if (!input.trim()) return;
 
-    const newMessages = [...messages, { sender: "user", text: input }];
-    setMessages(newMessages);
-    localStorage.setItem("ecoChatHistory", JSON.stringify(newMessages));
-    setInput("");
-    setIsTyping(true);
+  const newMessages = [...messages, { sender: "user", text: input }];
+  setMessages(newMessages);
+  localStorage.setItem("ecoChatHistory", JSON.stringify(newMessages));
+  setInput("");
+  setIsTyping(true);
 
-    const systemPrompt = `You are Ask EcoBot 🌿, a helpful and friendly AI assistant for a sustainable development website.
-You can answer any question related to:
-- Climate change
-- CO₂ emissions and reductions
-- Renewable energy (solar, wind, etc.)
-- Energy and fuel savings
-- Sustainable Development Goals (SDGs)
-- Green lifestyle tips
-- Environmental protection and sustainability policies
-- The website's live stats:
-   - Distance saved: ${stats.totalDistance} km
-   - Fuel saved: ${stats.totalFuelSaved} L
-   - CO₂ reduced: ${stats.totalCO2Reduced} kg
-   - Money saved: ₹${stats.totalMoneySaved}
-Always give helpful, easy-to-understand answers. Also suggest what users can ask if they seem confused.`;
+  setTimeout(() => {
+    const userText = input.toLowerCase();
 
-    try {
-      const response = await fetch(
-        "https://api.openai.com/v1/chat/completions",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${openaiApiKey}`,
-          },
-          body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            messages: [
-              { role: "system", content: systemPrompt },
-              ...newMessages.map((msg) => ({
-                role: msg.sender === "user" ? "user" : "assistant",
-                content: msg.text,
-              })),
-            ],
-          }),
-        }
-      );
-
-      const data = await response.json();
-      console.log("✅ API Response:", data);
-
-      if (!response.ok) {
-        console.error("❌ HTTP Error:", response.status, data);
-        throw new Error(data.error?.message || "Unknown error");
-      }
-
-      let reply = "";
-
-      if (data.choices && data.choices.length > 0) {
-        reply = data.choices[0].message.content;
-      } else {
-        reply = "⚠️ OpenAI did not return a valid message.";
-      }
-
-      const updatedMessages = [...newMessages, { sender: "bot", text: reply }];
-      setMessages(updatedMessages);
-      localStorage.setItem("ecoChatHistory", JSON.stringify(updatedMessages));
-      setIsTyping(false);
-      speak(reply);
-    } catch (error) {
-      console.error("❌ OpenAI API Error:", error);
-      const errorMsg = `❌ Something went wrong: ${error.message}`;
-      const errorMessages = [...newMessages, { sender: "bot", text: errorMsg }];
-      setMessages(errorMessages);
-      localStorage.setItem("ecoChatHistory", JSON.stringify(errorMessages));
-      setIsTyping(false);
+    let reply = "🤔 Hmm... I'm not sure. Try asking about CO₂ or fuel savings!";
+    if (userText.includes("most co2") || userText.includes("highest emissions")) {
+      reply = "🇨🇳 China consistently had the highest CO₂ emissions from 2019 to 2023 — nearly 10,000 Mt each year.";
+    } else if (userText.includes("least co2") || userText.includes("lowest emissions")) {
+      reply = "🇧🇷 Brazil had the lowest CO₂ emissions among the listed countries — staying under 500 Mt.";
+    } else if (userText.includes("usa emissions")) {
+      reply = "🇺🇸 The USA's CO₂ emissions dropped from around 5000 Mt in 2019 to about 4700 Mt in 2023.";
+    } else if (userText.includes("india emissions")) {
+      reply = "🇮🇳 India's emissions slowly increased and reached around 2800 Mt in 2023.";
+    } else if (userText.includes("future emissions") || userText.includes("2030 goals")) {
+      reply = "📉 If sustainability goals are met, all countries are projected to reduce CO₂ by 2030 — especially China and the USA.";
+    } else if (userText.includes("eco reboot goal") || userText.includes("mission")) {
+      reply = "🎯 EcoReboot aims to help reduce **10 million tons** of CO₂ by 2030, aligned with UN SDGs. Let’s go green!";
+    } else if (userText.includes("co2") || userText.includes("carbon")) {
+      reply = `🌍 You've reduced approx. ${stats?.totalCO2Reduced || 20} kg of CO₂ by using eco routes. Keep it up!`;
+    } else if (userText.includes("fuel")) {
+      reply = `⛽ Try walking or use bicycles in case of short distances or you can even switch to EV vehicles`;
+    } else if (userText.includes("hi")) {
+      reply = `Hi. Welcome here!`;
+    } else if (userText.includes("sdg") || userText.includes("sustainable development")) {
+      reply = `📘 The SDGs are 17 global goals by the UN to create a better future. Wanna know more about any one of them?`;
+    } else if (userText.includes("renewable")) {
+      reply = `⚡ Renewable energy includes solar, wind, hydro, and more. They're clean, sustainable, and awesome.`;
+    } else if (userText.includes("green lifestyle") || userText.includes("eco friendly")) {
+      reply = `🌱 A green lifestyle means reducing plastic, using public transport, eating local food, and saving electricity.`;
     }
-  };
+
+    const updatedMessages = [...newMessages, { sender: "bot", text: reply }];
+    setMessages(updatedMessages);
+    localStorage.setItem("ecoChatHistory", JSON.stringify(updatedMessages));
+    setIsTyping(false);
+    speak(reply);
+  }, 1000);
+};
+
 
   const handleVoice = () => {
     if (!("webkitSpeechRecognition" in window))
@@ -149,14 +123,14 @@ Always give helpful, easy-to-understand answers. Also suggest what users can ask
         💬
       </div>
       {isOpen && (
-        <div className="eco-chat-box" role="dialog" aria-modal="true" aria-label="EcoBot chat window">
+        <div className="eco-chat-box">
           <div className="eco-chat-header">
             Ask EcoBot 🌿
-            <button className="clear-btn" onClick={clearChat} aria-label="Clear chat">
+            <button className="clear-btn" onClick={clearChat}>
               Clear
             </button>
           </div>
-          <div className="eco-chat-body" aria-live="polite" aria-relevant="additions">
+          <div className="eco-chat-body">
             {messages.length === 0 ? (
               suggestedPrompts
             ) : (
@@ -184,15 +158,9 @@ Always give helpful, easy-to-understand answers. Also suggest what users can ask
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Ask me about climate, CO₂, fuel, savings..."
-              aria-label="Chat input"
-              autoComplete="off"
             />
-            <button onClick={sendMessage} aria-label="Send message">
-              Send
-            </button>
-            <button onClick={handleVoice} aria-label="Voice input">
-              🎤
-            </button>
+            <button onClick={sendMessage}>Send</button>
+            <button onClick={handleVoice}>🎤</button>
           </div>
         </div>
       )}
