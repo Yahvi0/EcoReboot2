@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 import { Link, useLocation } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ setshowlogin }) => {
   const [activeSection, setActiveSection] = useState('Home');
   const location = useLocation();
 
@@ -26,7 +26,7 @@ const Navbar = () => {
     <div className='navbar'>
       <ul className="navbar-menu">
         <li>
-          <Link to='/' onClick={() => setActiveSection('Home')} className={activeSection === 'Home' ? 'active link-btn' : 'link-btn'}>Home</Link>
+          <Link to="/" onClick={() => setActiveSection('Home')} className={activeSection === 'Home' ? 'active link-btn' : 'link-btn'}>Home</Link>
         </li>
         <li>
           <button onClick={() => handleScrollLink('reviews')} className={activeSection === 'reviews' ? 'active link-btn' : 'link-btn'}>Review</button>
@@ -38,11 +38,11 @@ const Navbar = () => {
           <button onClick={() => handleScrollLink('footer')} className={activeSection === 'footer' ? 'active link-btn' : 'link-btn'}>Contact Us</button>
         </li>
         <li>
-          <Link to='/reviews' onClick={() => setActiveSection('UserVoice')} className={activeSection === 'UserVoice' ? 'active link-btn' : 'link-btn'}>UserVoice</Link>
+          <Link to="/reviews" onClick={() => setActiveSection('UserVoice')} className={activeSection === 'UserVoice' ? 'active link-btn' : 'link-btn'}>UserVoice</Link>
         </li>
       </ul>
 
-      <button className="signin-btn">Sign In</button>
+      <button className="signin-btn" onClick={() => setshowlogin(true)}>Sign In</button>
     </div>
   );
 };

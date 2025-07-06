@@ -12,6 +12,8 @@ import step1Img from "../../assets/img1.jpg";
 import step2Img from "../../assets/img2.jpg";
 import step3Img from "../../assets/img3.jpg";
 import step4Img from "../../assets/img4.jpg";
+import play_store from "../../assets/play_store.png"
+import app_store from "../../assets/app_store.png"
 const CO2_PER_KM = 0.23; // kg CO2 per km
 const IDLE_CO2_PER_MIN = 0.02; // kg CO2 per minute idle
 const FUEL_PER_KM = 0.08; // liters per km
@@ -64,7 +66,6 @@ const Header = () => {
           </div>
         </div>
 
-        <Navbar />
 
         <div className="header-content">
           <p>
@@ -258,6 +259,15 @@ const Header = () => {
           </li>
         </ul>
       </div>
+{/* mobile-app */}
+      <div className='app-download' id='app-download'>
+        <p>For better experience download <br />EcoReboot</p>
+            <div className="app-download-platform">
+              <img src={play_store} alt="" />
+              <img src={app_store} alt="" />
+            </div>
+      </div>
+
     </>
   );
 };
