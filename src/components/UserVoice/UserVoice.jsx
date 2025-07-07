@@ -1,26 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./UserVoice.css";
+import axios from "axios";
 
 const initialTestimonials = [
   {
     name: "Aarav Mehta",
     company: "Aarav@gmail.com",
     rating: 5,
-    review: "Very efficient and easy to use. Helped reduce travel cost greatly!",
+    review:
+      "Very efficient and easy to use. Helped reduce travel cost greatly!",
     img: "https://randomuser.me/api/portraits/men/76.jpg",
   },
   {
     name: "Neha Sharma",
     company: "Neha12_56@gmail.com",
     rating: 4.5,
-    review: "The map and route optimization worked perfectly for my daily commute.",
+    review:
+      "The map and route optimization worked perfectly for my daily commute.",
     img: "https://randomuser.me/api/portraits/women/57.jpg",
   },
   {
     name: "Rahul Verma",
     company: "rahul_54@gmail.com",
     rating: 4,
-    review: "Impressive performance and great UI. Would love more customization options.",
+    review:
+      "Impressive performance and great UI. Would love more customization options.",
     img: "https://randomuser.me/api/portraits/men/71.jpg",
   },
   {
@@ -44,13 +48,6 @@ const initialTestimonials = [
     review: "Clean layout, fast load times, and solid performance overall.",
     img: "https://randomuser.me/api/portraits/women/15.jpg",
   },
-  {
-    name: "Aditya Desai",
-    company: "Aditya_desai@gmail.com",
-    rating: 5,
-    review: "One of the best eco-routing apps I've come across. Keep it up!",
-    img: "https://randomuser.me/api/portraits/men/48.jpg",
-  },
 ];
 
 const UserVoice = () => {
@@ -58,16 +55,34 @@ const UserVoice = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    rating: 5,
     review: "",
-    rating: "",
+  });
+  const [successMessage, setSuccessMessage] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/reviews")
+      .then((res) => {
+        const updated = res.data.map((r) => ({
+          name: r.name,
+          company: r.email,
+          rating: r.rating,
+          review: r.review,
+          img: `https://api.dicebear.com/7.x/thumbs/svg?seed=${r.name}`,
+        }));
+        setTestimonials((prev) => [...prev, ...updated]);
+      })
+      .catch((err) => console.error("Error fetching reviews:", err));
   });
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     const newReview = {
       name: formData.name,
       company: formData.email,
@@ -75,8 +90,22 @@ const UserVoice = () => {
       review: formData.review,
       img: `https://api.dicebear.com/7.x/thumbs/svg?seed=${formData.name}`,
     };
-    setTestimonials([...testimonials, newReview]);
-    setFormData({ name: "", email: "", review: "", rating: "" });
+
+    try {
+      await axios.post("http://localhost:5000/api/reviews", {
+        name: formData.name,
+        email: formData.email,
+        rating: formData.rating,
+        review: formData.review,
+      });
+      setTestimonials([...testimonials, newReview]);
+      setFormData({ name: "", email: "", rating: 5, review: "" });
+      setSuccessMessage("✅ Thank you! Your review has been submitted.");
+      setTimeout(() => setSuccessMessage(""), 3000); // Auto hide
+    } catch (err) {
+      console.error("Submission failed:", err);
+      setSuccessMessage("❌ Something went wrong. Try again!");
+    }
   };
 
   return (
@@ -94,14 +123,31 @@ const UserVoice = () => {
                 <p>{t.company}</p>
               </div>
             </div>
-            <p className="stars">⭐ {t.rating}</p>
+            <div className="stars">
+              {[...Array(5)].map((_, i) => {
+                const rating = t.rating;
+                const filled = i + 1 <= Math.floor(rating);
+                const half = rating > i && rating < i + 1;
+                return (
+                  <span
+                    key={i}
+                    className={`star ${filled ? "filled" : ""} ${
+                      half ? "half" : ""
+                    }`}
+                  >
+                    ★
+                  </span>
+                );
+              })}
+              <span className="rating-number">({t.rating})</span>
+            </div>
             <h4 className="title">Amazing Experience</h4>
             <p className="message">{t.review}</p>
           </div>
         ))}
       </div>
 
-      {/* Full-width form at bottom */}
+      {/* Review Submission Form */}
       <div className="review-form-section">
         <h2>📝 Leave a Review</h2>
         <form onSubmit={handleSubmit} className="review-form">
@@ -141,6 +187,9 @@ const UserVoice = () => {
           />
           <button type="submit">Submit</button>
         </form>
+
+        {/* ✅ Success message */}
+        {successMessage && <p className="success-message">{successMessage}</p>}
       </div>
     </section>
   );
