@@ -209,7 +209,7 @@ const Header = () => {
 
         {/* Person 2 */}
         <div className="contact-card">
-          <h3>Yahvi S.</h3>
+          <h3>Yahvi Chaudhary</h3>
           <a href="mailto:yahvi582@gmail.com">yahvi582@gmail.com</a>
           <div className="social-icons">
             <a href="https://www.linkedin.com/in/yahvi-chaudhary-69b579318/" target="_blank" rel="noreferrer">
