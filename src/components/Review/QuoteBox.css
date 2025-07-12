@@ -1,0 +1,11 @@
+.quote-box {
+  margin: 60px auto;
+  max-width: 700px;
+  padding: 40px 30px;
+  border-left: 6px solid #10b981;
+  background: #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.07);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #064e3b;
+}

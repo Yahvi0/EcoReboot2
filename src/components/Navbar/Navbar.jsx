@@ -14,15 +14,17 @@ const Navbar = ({ setshowlogin }) => {
     }
   };
 
-  /* highlight when route changes */
+  /* highlight the active nav item when the route changes */
   useEffect(() => {
     if (location.pathname === "/") setActiveSection("Home");
     else if (location.pathname === "/reviews") setActiveSection("UserVoice");
+    else if (location.pathname === "/impact") setActiveSection("impact");
   }, [location]);
 
   return (
     <div className="navbar">
       <ul className="navbar-menu">
+        {/* HOME (route) */}
         <li>
           <Link
             to="/"
@@ -32,22 +34,29 @@ const Navbar = ({ setshowlogin }) => {
             Home
           </Link>
         </li>
+
+        {/* REVIEW (now navigates to /impact) */}
         <li>
-          <button
-            onClick={() => handleScrollLink("reviews")}
-            className={activeSection === "reviews" ? "active link-btn" : "link-btn"}
+          <Link
+            to="/impact"
+            onClick={() => setActiveSection("impact")}
+            className={activeSection === "impact" ? "active link-btn" : "link-btn"}
           >
             Review
-          </button>
+          </Link>
         </li>
+
+        {/* MOBILE APP (scroll inside home) */}
         <li>
           <button
             onClick={() => handleScrollLink("app-download")}
             className={activeSection === "app-download" ? "active link-btn" : "link-btn"}
           >
-            Mobile-App
+            Mobile‑App
           </button>
         </li>
+
+        {/* CONTACT US (scroll inside home) */}
         <li>
           <button
             onClick={() => handleScrollLink("contact-section")}
@@ -56,6 +65,8 @@ const Navbar = ({ setshowlogin }) => {
             Contact Us
           </button>
         </li>
+
+        {/* USERVOICE (separate route) */}
         <li>
           <Link
             to="/reviews"
@@ -67,6 +78,7 @@ const Navbar = ({ setshowlogin }) => {
         </li>
       </ul>
 
+      {/* SIGN‑IN button */}
       <button className="signin-btn" onClick={() => setshowlogin(true)}>
         Sign In
       </button>
