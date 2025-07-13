@@ -105,7 +105,7 @@ const Header = ({ setshowlogin, isLoggedIn, setIsLoggedIn }) => {
       {/* ───── CTA ───── */}
       <div className="cta-section">
         <h3>Ready to reboot your delivery strategy?</h3>
-        <button onClick={() => navigate("/impact")} className="cta-btn">
+        <button onClick={() => navigate("/map")} className="cta-btn">
           Get Started
         </button>
       </div>

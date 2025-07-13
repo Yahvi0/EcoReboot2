@@ -48,6 +48,8 @@ import { Routes, Route } from "react-router-dom"; // ✅ no BrowserRouter here!
 import ReviewPage from "./components/Review/ReviewPage";
 import Header from "./components/Header/Header";
 import MapComponent from "./components/Map/MapComponent";
+import UserVoice from "./components/UserVoice/UserVoice"; 
+
 
 const App = () => {
   const [showlogin, setshowlogin] = useState(false);
@@ -70,13 +72,15 @@ const App = () => {
       />
 
       <Routes>
-        <Route
-          path="/"
-          element={<Header isLoggedIn={isLoggedIn} setshowlogin={setshowlogin} />}
-        />
-        <Route path="/impact" element={<ReviewPage />} />
-        <Route path="/map" element={<MapComponent />} />
-      </Routes>
+  <Route path="/" element={<Header isLoggedIn={isLoggedIn} setshowlogin={setshowlogin} />} />
+  <Route path="/impact" element={<ReviewPage />} />
+  <Route path="/map" element={<MapComponent />} />
+  <Route path="/reviews" element={<UserVoice />} />
+
+  {/* 👇 Catch-all for undefined routes like /reviews */}
+  <Route path="*" element={<h2 style={{ textAlign: 'center', marginTop: '100px' }}>404 – Page Not Found 💔</h2>} />
+</Routes>
+
     </>
   );
 };
