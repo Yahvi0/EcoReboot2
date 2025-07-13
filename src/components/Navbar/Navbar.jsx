@@ -35,52 +35,60 @@ const Navbar = ({ setshowlogin, isLoggedIn, setIsLoggedIn }) => {
           <Link
             to="/"
             onClick={() => setActiveSection("Home")}
-            className={activeSection === "Home" ? "active link-btn" : "link-btn"}
+            className={
+              activeSection === "Home" ? "active link-btn" : "link-btn"
+            }
           >
             Home
           </Link>
-        </li>
+          <li>
+            <Link
+              to="/map"
+              onClick={() => setActiveSection("Map")}
+              className={
+                activeSection === "Map" ? "active link-btn" : "link-btn"
+              }
+            >
+              Map
+            </Link>
+          </li>
+          <li>
+            <button
+              onClick={() => handleScrollLink("app-download")}
+              className={
+                activeSection === "app-download"
+                  ? "active link-btn"
+                  : "link-btn"
+              }
+            >
+              Mobile-App
+            </button>
+          </li>
 
-        <li>
-          <Link
-            to="/impact"
-            onClick={() => setActiveSection("Impact")}
-            className={activeSection === "Impact" ? "active link-btn" : "link-btn"}
-          >
-            Review
-          </Link>
-        </li>
+          <li>
+            <button
+              onClick={() => handleScrollLink("contact-section")}
+              className={
+                activeSection === "contact-section"
+                  ? "active link-btn"
+                  : "link-btn"
+              }
+            >
+              Contact Us
+            </button>
+          </li>
 
-        <li>
-          <Link
-            to="/map"
-            onClick={() => setActiveSection("Map")}
-            className={activeSection === "Map" ? "active link-btn" : "link-btn"}
-          >
-            Map
-          </Link>
-        </li>
-
-        <li>
-          <button
-            onClick={() => handleScrollLink("app-download")}
-            className={
-              activeSection === "app-download" ? "active link-btn" : "link-btn"
-            }
-          >
-            Mobile-App
-          </button>
-        </li>
-
-        <li>
-          <button
-            onClick={() => handleScrollLink("contact-section")}
-            className={
-              activeSection === "contact-section" ? "active link-btn" : "link-btn"
-            }
-          >
-            Contact Us
-          </button>
+          <li>
+            <Link
+              to="/impact"
+              onClick={() => setActiveSection("Impact")}
+              className={
+                activeSection === "Impact" ? "active link-btn" : "link-btn"
+              }
+            >
+              Claim Badges
+            </Link>
+          </li>
         </li>
 
         <li>
@@ -101,10 +109,7 @@ const Navbar = ({ setshowlogin, isLoggedIn, setIsLoggedIn }) => {
           Logout
         </button>
       ) : (
-        <button
-          className="signin-btn"
-          onClick={() => setshowlogin(true)}
-        >
+        <button className="signin-btn" onClick={() => setshowlogin(true)}>
           Sign In
         </button>
       )}
