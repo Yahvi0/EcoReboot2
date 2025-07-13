@@ -182,7 +182,7 @@ const UserVoice = () => {
             onChange={handleChange}
             min="1"
             max="5"
-            step="0.1"
+            step="1"
             required
           />
           <button type="submit">Submit</button>

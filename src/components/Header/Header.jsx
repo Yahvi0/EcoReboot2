@@ -124,7 +124,7 @@ const Header = ({ setshowlogin, isLoggedIn, setIsLoggedIn }) => {
         <div className="steps-grid">
           {[
             [step1Img, "1️⃣ Enter your route"],
-            [step2Img, "📊 See CO₂, fuel & cost estimates"],
+            [step2Img, "📊 See CO₂, fuel & cost  estimates"],
             [step3Img, "🌿 Choose greenest path"],
             [step4Img, "📈 Track and improve"]
           ].map(([img, txt], i) => (

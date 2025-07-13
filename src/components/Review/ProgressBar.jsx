@@ -4,7 +4,7 @@ import CountUp from "react-countup";
 import "./ProgressBar.css";
 
 const ProgressBar = ({ percentage = 0 }) => {
-  const safePercent = Math.min(Math.max(percentage, 0), 100);
+  const safePercent = Math.min(Math.max(percentage, 40), 100);
 
   const getEmoji = (p) => {
     if (p >= 100) return "🌍🥇";
