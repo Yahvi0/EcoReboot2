@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 // import React, { useState } from "react";
 // import { Routes, Route } from "react-router-dom";
 // import Navbar from "./components/Navbar/Navbar";
@@ -41,10 +41,9 @@
 
 // export default App;
 import React, { useState, useEffect } from "react";
-=======
+
 // src/App.jsx
 import React, { useState } from "react";
->>>>>>> e683cea6e9393b891dd5be9acfa02e48fe516f7e
 import { Routes, Route } from "react-router-dom";
 
 /* Core pages & components */
@@ -80,19 +79,12 @@ const App = () => {
 
   return (
     <>
-<<<<<<< HEAD
-      {showlogin && <LoginPopUp setshowlogin={setshowlogin} setIsLoggedIn={setIsLoggedIn} />}
-
-      <div className="app">
-        <Navbar setshowlogin={setshowlogin} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-=======
       {/* Sign‑in modal */}
       {showlogin && <LoginPopUp setshowlogin={setshowlogin} />}
 
       <div className="app">
         {/* Fixed top‑nav; pass setter so Navbar can open Login modal */}
         <Navbar setshowlogin={setshowlogin} />
->>>>>>> e683cea6e9393b891dd5be9acfa02e48fe516f7e
 
         <Routes>
           <Route path="/"        element={<Header      />} />
