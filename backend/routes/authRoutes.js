@@ -39,4 +39,37 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// Save search history
+router.post("/save-search", async (req, res) => {
+  const { userId, start, end, stops } = req.body;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    user.searchHistory.push({ start, end, stops });
+    await user.save();
+
+    res.status(200).json({ message: "Search history saved" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to save search history" });
+  }
+});
+
+// Fetch search history
+router.get("/history/:userId", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.status(200).json(user.searchHistory);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Failed to fetch history" });
+  }
+});
+
+
 export default router;
+

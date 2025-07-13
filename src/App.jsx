@@ -39,7 +39,7 @@
 // };
 
 // export default App;
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Header from "./components/Header/Header";
@@ -51,6 +51,7 @@ import LoginPopUp from "./components/LoginPopUp/LoginPopUp";
 
 const App = () => {
   const [showlogin, setshowlogin] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const sustainabilityStats = {
     totalDistance: 124,
@@ -59,13 +60,19 @@ const App = () => {
     totalMoneySaved: 1500,
   };
 
+  useEffect(() => {
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   return (
     <>
-      {showlogin && <LoginPopUp setshowlogin={setshowlogin} />}
+      {showlogin && <LoginPopUp setshowlogin={setshowlogin} setIsLoggedIn={setIsLoggedIn} />}
 
       <div className="app">
-        {/* 💖 You are passing setshowlogin here correctly */}
-        <Navbar setshowlogin={setshowlogin} />
+        <Navbar setshowlogin={setshowlogin} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
 
         <Routes>
           <Route path="/" element={<Header />} />

@@ -186,10 +186,49 @@ const MapComponent = () => {
   const [distance, setDistance] = useState(null);
   const [duration, setDuration] = useState(null);
   const [typingTimer, setTypingTimer] = useState(null);
-
-  const [showCarbon, setShowCarbon] = useState(false);
   const [carbonEmission, setCarbonEmission] = useState(0);
   const [travelTips, setTravelTips] = useState([]);
+  const [showCarbon, setShowCarbon] = useState(false);
+  const [history, setHistory] = useState([]);
+
+  const userId = localStorage.getItem("userId");
+
+  const inputStyle = {
+    padding: '12px',
+    width: '220px',
+    borderRadius: '8px',
+    border: '1px solid #ccc',
+    fontSize: '14px',
+    boxShadow: '0 1px 4px rgba(0,0,0,0.1)'
+  };
+
+  const buttonStyle = {
+    padding: '10px 20px',
+    margin: '0 5px',
+    borderRadius: '20px',
+    border: 'none',
+    backgroundColor: '#4CAF50',
+    color: 'white',
+    fontSize: '14px',
+    cursor: 'pointer',
+    transition: 'background 0.3s',
+  };
+
+  const suggestionsContainer = {
+    backgroundColor: 'white',
+    border: '1px solid #ccc',
+    borderRadius: '8px',
+    width: '500px',
+    margin: '0 auto 20px',
+    boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
+  };
+
+  const suggestionItem = {
+    padding: '10px',
+    borderBottom: '1px solid #eee',
+    cursor: 'pointer',
+    textAlign: 'left'
+  };
 
   const fetchSuggestions = async (query) => {
     if (!query) return;
@@ -259,6 +298,21 @@ const MapComponent = () => {
         });
       }
 
+      // Save route history
+      if (userId) {
+        await fetch("http://localhost:4000/api/auth/history", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId,
+            start,
+            end,
+            stops: stopNames,
+            date: new Date(),
+          }),
+        });
+      }
+
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -268,7 +322,7 @@ const MapComponent = () => {
   const handleCarbonClick = () => {
     if (!distance) return alert("Please generate a route first!");
 
-    const emissionRate = 0.21; // average petrol car in kg/km
+    const emissionRate = 0.21;
     const emission = distance * emissionRate;
     setCarbonEmission(emission.toFixed(2));
 
@@ -286,85 +340,41 @@ const MapComponent = () => {
     setShowCarbon(true);
   };
 
-  return (
-    <div style={{ padding: '80px', textAlign: 'center' }}>
-      <h2>Eco-Friendly Route Optimizer 🌍</h2>
+  const fetchSearchHistory = async () => {
+    if (!userId) return alert("Login required to view history");
+    const res = await fetch(`http://localhost:4000/api/auth/history/${userId}`);
+    const data = await res.json();
+    setHistory(data || []);
+  };
 
-      <input
-        type="text"
-        placeholder="Start Location"
-        value={start}
-        onChange={(e) => {
-          setStart(e.target.value);
-          debounceSuggestions(e.target.value);
-        }}
-        style={{ margin: '10px', padding: '10px', width: '250px' }}
-      />
-      <input
-        type="text"
-        placeholder="End Location"
-        value={end}
-        onChange={(e) => {
-          setEnd(e.target.value);
-          debounceSuggestions(e.target.value);
-        }}
-        style={{ margin: '10px', padding: '10px', width: '250px' }}
-      />
-      <input
-        type="text"
-        placeholder="Stops (comma separated)"
-        value={stops}
-        onChange={(e) => setStops(e.target.value)}
-        style={{ margin: '10px', padding: '10px', width: '300px' }}
-      />
+  return (
+    <div style={{ padding: '60px', textAlign: 'center', fontFamily: 'Arial, sans-serif', backgroundColor: '#f7f9fb' }}>
+      <h2 style={{ margin: '30px 0 20px', paddingTop: '20px' }}>
+  🌍 <strong>Eco-Friendly Route Optimizer</strong>
+</h2>
+
+
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '20px' }}>
+        <input type="text" placeholder="Start Location" value={start} onChange={(e) => { setStart(e.target.value); debounceSuggestions(e.target.value); }} style={inputStyle} />
+        <input type="text" placeholder="End Location" value={end} onChange={(e) => { setEnd(e.target.value); debounceSuggestions(e.target.value); }} style={inputStyle} />
+        <input type="text" placeholder="Stops (comma separated)" value={stops} onChange={(e) => setStops(e.target.value)} style={inputStyle} />
+      </div>
 
       {suggestions.length > 0 && (
-        <div style={{ backgroundColor: '#f9f9f9', margin: '10px auto', width: '90%', border: '1px solid #ccc', borderRadius: '6px' }}>
+        <div style={suggestionsContainer}>
           {suggestions.map((s, i) => (
-            <div
-              key={i}
-              style={{ padding: '8px', borderBottom: '1px solid #eee', cursor: 'pointer' }}
-              onClick={() => handleSuggestionClick(s.display_name, start ? 'end' : 'start')}
-            >
+            <div key={i} style={suggestionItem} onClick={() => handleSuggestionClick(s.display_name, start ? 'end' : 'start')}>
               {s.display_name}
             </div>
           ))}
         </div>
       )}
 
-      <br />
-      <button
-        onClick={handleRoute}
-        style={{
-          padding: '12px 25px',
-          backgroundColor: '#28a745',
-          color: 'white',
-          border: 'none',
-          borderRadius: '8px',
-          cursor: 'pointer',
-          marginTop: '15px',
-        }}
-      >
-        Show Route
-      </button>
-
-      <button
-        onClick={handleCarbonClick}
-        style={{
-          padding: '12px 25px',
-          background: 'linear-gradient(to right, #43cea2, #185a9d)',
-          color: 'white',
-          border: 'none',
-          borderRadius: '20px',
-          fontSize: '16px',
-          cursor: 'pointer',
-          marginTop: '15px',
-          marginLeft: '15px',
-          boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
-        }}
-      >
-        🌱 Show Carbon Emission & Tips
-      </button>
+      <div style={{ margin: '20px 0' }}>
+        <button style={buttonStyle} onClick={handleRoute}>🗺️ Show Route</button>
+        <button style={buttonStyle} onClick={handleCarbonClick}>🌱 Show Carbon Emission & Tips</button>
+        <button style={buttonStyle} onClick={fetchSearchHistory}>📜 View My Search History</button>
+      </div>
 
       {distance && duration && (
         <div style={{ marginTop: '20px', fontSize: '18px' }}>
@@ -400,10 +410,35 @@ const MapComponent = () => {
         </motion.div>
       )}
 
+      {history.length > 0 && (
+        <div style={{
+          backgroundColor: '#fff',
+          padding: '20px',
+          borderRadius: '10px',
+          boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
+          maxWidth: '600px',
+          margin: '20px auto',
+          textAlign: 'left'
+        }}>
+          <h3>🕘 My Search History:</h3>
+          <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
+            {history.map((item, index) => (
+              <li key={index} style={{
+                padding: '10px',
+                borderBottom: '1px solid #ddd'
+              }}>
+                <p><strong>From:</strong> {item.start} <strong>To:</strong> {item.end}</p>
+                <p><strong>Stops:</strong> {item.stops.join(', ') || 'None'}</p>
+                <p><strong>Date:</strong> {new Date(item.date).toLocaleString()}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <div id="map" style={{ height: '500px', width: '100%', marginTop: '20px' }}></div>
     </div>
   );
 };
 
 export default MapComponent;
-

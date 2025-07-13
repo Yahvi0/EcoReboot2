@@ -3,7 +3,7 @@ import './LoginPopUp.css';
 import cross_icon from "../../assets/cross_icon.png";
 import axios from 'axios';
 
-const LoginPopUp = ({ setshowlogin }) => {
+const LoginPopUp = ({ setshowlogin, setIsLoggedIn }) => {
   const [currstate, setcurrstate] = useState("Sign Up");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -18,6 +18,8 @@ const LoginPopUp = ({ setshowlogin }) => {
     try {
       const res = await axios.post(url, payload);
       alert(res.data.message);
+      localStorage.setItem("userId", res.data.user._id);
+      setIsLoggedIn(true);  // ✅ Mark as logged in
       setshowlogin(false);
     } catch (err) {
       alert(err.response.data.message || "Something went wrong");

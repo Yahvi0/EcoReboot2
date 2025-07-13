@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 import { Link, useLocation } from 'react-router-dom';
 
-const Navbar = ({ setshowlogin }) => {
+const Navbar = ({ setshowlogin, isLoggedIn, setIsLoggedIn }) => {
   const [activeSection, setActiveSection] = useState('Home');
   const location = useLocation();
 
@@ -21,6 +21,11 @@ const Navbar = ({ setshowlogin }) => {
       setActiveSection('UserVoice');
     }
   }, [location]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('userId');
+    setIsLoggedIn(false);
+  };
 
   return (
     <div className='navbar'>
@@ -42,7 +47,11 @@ const Navbar = ({ setshowlogin }) => {
         </li>
       </ul>
 
-      <button className="signin-btn" onClick={() => setshowlogin(true)}>Sign In</button>
+      {isLoggedIn ? (
+        <button className="signin-btn" onClick={handleLogout}>Logout</button>
+      ) : (
+        <button className="signin-btn" onClick={() => setshowlogin(true)}>Sign In</button>
+      )}
     </div>
   );
 };
