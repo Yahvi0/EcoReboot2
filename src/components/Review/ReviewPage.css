@@ -11,3 +11,23 @@
   margin: 40px 0 20px;
   color: #134e4a;
 }
+.review-container {
+  text-align: center;
+  padding: 40px;
+  background: #f9fff9;
+}
+
+.review-container h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #0a7740;
+}
+
+.review-details {
+  margin-top: 20px;
+  font-size: 1.2rem;
+}
+
+.review-details p {
+  margin: 10px 0;
+}

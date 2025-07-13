@@ -24,7 +24,8 @@ const IDLE_CO2_PER_MIN = 0.02;
 const FUEL_PER_KM = 0.08;
 const FUEL_PRICE = 100;
 
-const Header = () => {
+const Header = ({ setshowlogin, isLoggedIn, setIsLoggedIn }) => {
+
   const navigate = useNavigate();
   const [showAbout, setShowAbout] = useState(false);
   const [showChart, setShowChart] = useState(false);
@@ -52,7 +53,12 @@ const Header = () => {
   return (
     <>
       {/* Fixed top‑nav */}
-      <Navbar />
+      <Navbar 
+  setshowlogin={setshowlogin}
+  isLoggedIn={isLoggedIn}
+  setIsLoggedIn={setIsLoggedIn}
+/>
+
 
       {/* ───── Hero / video banner ───── */}
       <div className="header">
@@ -99,8 +105,8 @@ const Header = () => {
       {/* ───── CTA ───── */}
       <div className="cta-section">
         <h3>Ready to reboot your delivery strategy?</h3>
-        <button onClick={() => navigate("/start")} className="cta-btn">
-          Get Started
+        <button onClick={() => navigate("/impact")} className="cta-btn">
+          Get Started
         </button>
       </div>
 
