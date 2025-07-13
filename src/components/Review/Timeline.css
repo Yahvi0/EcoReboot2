@@ -1,0 +1,58 @@
+/* src/components/Review/Timeline.css */
+.timeline {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.timeline h2 {
+  font-size: 2rem;
+  color: #14532d;
+  margin-bottom: 30px;
+}
+
+/* list container with vertical line */
+.timeline ul {
+  list-style: none;
+  padding: 0;
+  margin: auto;
+  max-width: 600px;
+  position: relative;
+}
+
+.timeline ul::before {
+  content: "";
+  position: absolute;
+  left: 14px;      /* aligns with bullet dot */
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #10b981;
+}
+
+/* each event */
+.timeline li {
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  margin-bottom: 22px;
+  padding: 12px 20px 12px 46px; /* space for vertical line */
+  position: relative;
+}
+
+/* little bullet dot */
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 18px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+/* date text */
+.timeline li span {
+  font-weight: 600;
+  color: #198754;
+}

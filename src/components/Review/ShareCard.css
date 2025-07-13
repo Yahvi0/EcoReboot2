@@ -1,0 +1,30 @@
+.share-card {
+  margin: 60px auto 80px;
+  max-width: 380px;
+  text-align: center;
+  background: #e8f5e9;
+  padding: 30px 20px;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+}
+
+.share-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 16px;
+  color: #14532d;
+}
+
+.share-card button {
+  background: #198754;
+  border: none;
+  color: #fff;
+  padding: 12px 28px;
+  font-size: 1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.share-card button:hover {
+  background: #0f5132;
+}
